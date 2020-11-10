@@ -54,7 +54,12 @@ test('renders without errors, content loaded, and dropdown working', async () =>
 
     // dropdown menu working
     await waitFor(() => {
-        
+        const dropdown = screen.queryByText(/select a season/i)
+        fireEvent.mouseDown(dropdown)
+        const season1 = screen.queryByText(/season 1/i)
+        fireEvent.click(season1)
+        const episodes = screen.getAllByText(/season 1/i)
+        expect(episodes).toHaveLength(2)
     })  
 })
 
