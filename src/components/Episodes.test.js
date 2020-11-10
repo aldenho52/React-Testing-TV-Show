@@ -6,18 +6,36 @@ test('Episodes renders correctly', () => {
     render(<Episodes episodes={[]}/>)
 })
 
-const missions = [
-    { mission_name: 'Mission 1', mission_id: 1},
-    { mission_name: 'Mission 2', mission_id: 2}
-]
+const episodes = [
+          {
+            id: 1,
+            url: "url1",
+            name: "Episode 1",
+            season: 1,
+            number: 1,
+            summary: "Ep_Summary_1",
+            runtime: 1,
+            image: { medium: "ep1_med_image", }
+          },
+          {
+            id: 2,
+            url: "url2",
+            name: "Episode 2",
+            season: 1,
+            number: 2,
+            summary: "Ep_Summary_2",
+            runtime: 2,
+            image: { medium: "ep2_med_image", }
+          }
+        ]
 
-test('rerenders correctly when passing in new mission data', () => {
-    // const {rerender} = render(<MissionsList missions={[]} />)
-    // let missionObjects = screen.queryAllByTestId('mission')
-    // expect(missionObjects).toStrictEqual([])
+test('rerenders correctly when passing in new episode data', () => {
+    const {rerender} = render(<Episodes episodes={[]}/>)
+    let episodeObjects = screen.queryAllByTestId('1')
+    expect(episodeObjects).toStrictEqual([])
 
-    // rerender(<MissionsList missions={missions} />)
+    rerender(<Episodes episodes={episodes} />)
 
-    // missionObjects = screen.queryAllByTestId('mission')
-    // expect(missionObjects).toHaveLength(2)
+    episodeObjects = screen.queryAllByTestId('1')
+    expect(episodeObjects).toHaveLength(2)
 })
