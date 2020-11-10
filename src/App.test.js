@@ -1,7 +1,7 @@
 import React from 'react'
-import { render, screen, waitFor, fireEvent, queryByText } from '@testing-library/react'
 import App from './App'
-
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'
+import {userEvent} from '@testing-library/user-event'
 import { fetchShow as mockFetchShow } from './api/fetchShow'
 jest.mock('./api/fetchShow')
 
@@ -47,12 +47,14 @@ test('renders without errors, content loaded, and dropdown working', async () =>
     mockFetchShow.mockResolvedValueOnce(data)
     render(<App />)
     
+    // default home page rendering correctly
     const name = screen.queryByText(/show 1/i)
     const summary = screen.queryByText(/summary 1/i)
-    const dropdown = screen.queryByText(/select a season/i)
-    fireEvent.click(dropdown)
-    const seasonOne = queryByText(/season 1/i)
-    userEvent.click(seasonOne)
-    expect(queryAllByTestId('episode')).toHaveLength(2) 
+
+
+    // dropdown menu working
+    await waitFor(() => {
+        
+    })  
 })
 
